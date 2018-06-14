@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import hug
-from init import connect_db  # change pour une lib perso
+#import mysql.connector.errors
+
+from init import connect_db,insert_data  # change pour une lib perso
 import json
 import collections
 
@@ -20,8 +22,7 @@ def search_pokemon_name(name=None, pokemon_id=None, pk_type=None):
     if pokemon_id is not None:
         try:
             int(pokemon_id)
-        except ValueError as e:
-            print(e)
+        except ValueError:
             return {"error": "invalid Pokemon_id"}
     # if name and pokemon_id and pk_type:
     #     cursor.execute(
@@ -81,7 +82,18 @@ def new_pokemon(id=None, pokemon_id=None, name=None, type=None, type_bis=None, t
 ##CHECK VALIDE TYPE
 ##TYPE DIFFERENT
 ##
-
+    if type is not None:
+        cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type + "'")
+        cursor.fetchall()
+        if cursor.rowcount is not 1:
+            return {"Error": "The type " + type + " don't exist"}
+    if type_bis is not None:
+        cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type_bis + "'")
+        cursor.fetchall()
+        if cursor.rowcount is not 1:
+            return {"Error": "The type" + type_bis + " don't exist"}
+    if type == type_bis and type is not None:
+        return {"Error": "The types can't be the same"}
 
 
     # pour les none value on leurs affecte la value de base
@@ -93,8 +105,12 @@ def new_pokemon(id=None, pokemon_id=None, name=None, type=None, type_bis=None, t
         name = row[2]
     if type is None:
         type = row[3]
+        if type == type_bis:
+            return {"Error": "The types can't be the same"}
     if type_bis is None:
         type_bis = row[4]
+        if type == type_bis:
+            return {"Error": "The types can't be the same"}
     if total is None:
         total = row[5]
     if hp is None:
@@ -110,10 +126,6 @@ def new_pokemon(id=None, pokemon_id=None, name=None, type=None, type_bis=None, t
     if speed is None:
         speed = row[11]
 
-    print(id)
-    print(name)
-    print(pokemon_id)
-    print(type)
     cursor.execute("UPDATE `pk_database` SET `pokemon_id`="+str(pokemon_id)+",`name`='"+name+"',`Type`='"+type+"',`Type_bis`='"+type_bis+"',`Total`="+str(total)+",`HP`="+str(hp)+",`Attack`="+str(attack)+",`Defense`="+str(defense)+",`Sp_attack`="+str(sp_attack)+",`Sp_defense`="+str(sp_attack)+",`speed`="+str(speed)+" WHERE `id`="+str(id))
     db.commit()
     cursor.execute("SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`,`Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE `id` = " + id)
@@ -130,4 +142,25 @@ def new_pokemon(id=None, pokemon_id=None, name=None, type=None, type_bis=None, t
     d['Sp_attack'] = row[9]
     d['Sp_defense'] = row[10]
     d['speed'] = row[11]
+    cursor.close()
     return d
+
+@hug.delete("/delete")
+def delete_pokemon(id):
+    try:
+        int(id)
+    except ValueError:
+        return {"error": "invalid id"}
+
+    db = connect_db()
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM `pk_database` WHERE `id` =" + id)
+    db.commit()
+
+@hug.get("/purge")
+def purge_database():
+    db = connect_db()
+    cursor = db.cursor()
+    cursor.execute("DROP TABLE IF EXISTS `pk_database`, `pk_type`;")
+    db.commit()
+    insert_data()
