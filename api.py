@@ -41,7 +41,12 @@ def search_pokemon_name(name=None, pokemon_id=None, pk_type=None):
     elif pk_type:
         cursor.execute(
             "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`,`Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE `type` = '" + pk_type + "' OR `type_bis` = '" + pk_type + "'")
+    else:
+        cursor.execute(
+            "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`,`Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE 1")
     db.commit()
+    if cursor.rowcount == 0:
+        return {"[]"}
     rows = cursor.fetchall()
     row_list = []
     for row in rows:

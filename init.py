@@ -115,5 +115,5 @@ def insert_data():
         i += 1
 
 
-insert_data()
+#insert_data()
 
