@@ -163,6 +163,7 @@ def delete_pokemon(id):
     cursor = db.cursor()
     cursor.execute("DELETE FROM `pk_database` WHERE `id` =" + id)
     db.commit()
+    cursor.close()
 
 
 @hug.get("/purge")
