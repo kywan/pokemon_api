@@ -8,10 +8,6 @@ import mysql.connector.errors
 import re
 
 
-# Sumary : get a table with all data
-#
-#
-#
 def get_html_table():
     req = Request('https://pokemondb.net/pokedex/all', headers={'User-Agent': 'Mozilla/5.0'})
     html = urlopen(req).read()
@@ -100,7 +96,6 @@ def insert_data():
             row[i].append(type_pk[0])
             row[i].append(type_pk[1])
             db.commit()
-            #print(row[i])
             cursor.execute("""INSERT INTO `pk_database`(`pokemon_id`, `name`, `Total`, `HP`, `Attack`,
             `Defense`, `Sp_attack`, `Sp_defense`, `speed`, `type`, `type_bis`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
                            (row[i]))
@@ -113,6 +108,5 @@ def insert_data():
                 print(row[i])
         i += 1
 
-
-#insert_data()
+insert_data()
 
