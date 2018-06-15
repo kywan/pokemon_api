@@ -147,7 +147,7 @@ SWAGGER
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| type | query |  | No | string |
+| pk_type | query |  | No | string |
 | pokemon_id | query |  | No | string |
 | name | query |  | No | string |
 
@@ -186,6 +186,21 @@ SWAGGER
 
 ## bonus
 
-* Get with params : name | pokemon_id | type | name + pokemon_id
+* Get avec different params : name | pokemon_id | type | name + pokemon_id
 * Swagger en yaml ET en markdown
-* 
+* Gestion des entrée client
+    * sur le /search
+        * Gestion de l'id invalide
+        * Retour null si aucune corespondance
+    * sur le /update
+        * Seul l'id est obligatoire, les autre params son optionel
+        * Gestion du name unique
+        * impossible de metre 2 fois le meme type
+        * impossible de metre un type n'etant pas deja dans la table
+        * retourne le json du pokemon modifié
+    * sur le /create
+        * Gestion du name unique
+        * impossible de metre 2 fois le meme type
+        * impossible de metre un type n'etant pas deja dans la table
+        * retourne le json du pokemon créé
+* fonction de purge avec /purge

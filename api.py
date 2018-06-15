@@ -3,7 +3,7 @@
 
 import hug
 
-from init import connect_db, insert_data  # change pour une lib perso
+from init import connect_db, insert_data
 import collections
 
 
@@ -21,10 +21,10 @@ def search_pokemon_name(name=None, pokemon_id=None, pk_type=None):
     #         "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`, `Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, "
     #         "`Sp_defense`, `speed` FROM `pk_database` WHERE `pokemon_id` = " + pokemon_id + "AND `name` LIKE '%" +
     #         name + "%' AND (`Type` = '" + pk_type + "' OR `Type_bis` = '" + pk_type + "')")
-    # elif name and pokemon_id:
-    #     cursor.execute(
-    #         "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`, `Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE `pokemon_id` = " + pokemon_id + "AND `name` LIKE '%" + name + "%'")
-    if name:
+    if name and pokemon_id:
+         cursor.execute(
+             "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`, `Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE `pokemon_id` = " + pokemon_id + "AND `name` LIKE '%" + name + "%'")
+    elif name:
         cursor.execute(
             "SELECT `id`, `pokemon_id`, `name`, `Type`, `Type_bis`, `Total`, `HP`, `Attack`, `Defense`, `Sp_attack`, `Sp_defense`, `speed` FROM `pk_database` WHERE `name` LIKE '%" + name + "%'")
     elif pokemon_id:
@@ -78,10 +78,6 @@ def new_pokemon(id=None, pokemon_id=None, name=None, type=None, type_bis=None, t
         cursor.fetchall()
         if cursor.rowcount is not 0:
             return {"Error": "A pokemon have already this name"}
-
-    ##CHECK VALIDE TYPE
-    ##TYPE DIFFERENT
-    ##
     if type is not None:
         cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type + "'")
         cursor.fetchall()
@@ -188,10 +184,6 @@ def create_pokemon(pokemon_id=None, name=None, total=None, hp=None, attack=None,
         cursor.fetchall()
         if cursor.rowcount is not 0:
             return {"Error": "A pokemon have already this name"}
-
-    ##CHECK VALIDE TYPE
-    ##TYPE DIFFERENT
-    ##
     if type is not None:
         cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type + "'")
         cursor.fetchall()
