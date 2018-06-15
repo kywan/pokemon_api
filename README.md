@@ -1,7 +1,17 @@
 # pokemon_api
+## Sommaire
+[instalation](#instalation)
 
+[configuration](#configuration)
+
+[How to use](#how-to-use)
+
+[swagger](#swagger)
+
+[bonus](#bonus)
 ### Instalation
 ###### Instalation rapide (docker)
+pas encore disponible
 ###### Pré requis
 [Hug.rest](http://www.hug.rest)
 
@@ -12,13 +22,17 @@
 
 In init.py at the line 39 you can change all data about the connection.
 
-```db = mysql.connector.connect(host="127.0.0.1", user="root", database="base_sql")```
+```python 
+db = mysql.connector.connect(host="127.0.0.1", user="root", database="base_sql")
+```
 
 ### How to use
 
 execute this in your project folder :
 
-```hug -f api.py```
+```bash
+hug -f api.py
+```
 
 After just go on your localhost and use the api
 
@@ -27,7 +41,7 @@ For exemple this:
 ````http://localhost:8000/search````
 
 return to you :
-````
+````json
 [
         {
         "id": 3,
@@ -49,4 +63,127 @@ return to you :
 ]
 `````
 
+SWAGGER
+===========
 
+**Version:** 0.5
+
+### /change
+---
+##### ***POST***
+**Parameters**
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| id | query | unique id of your pokemon in database | Yes | string |
+| pokemon_id | query | id of your pokemon | Yes | string |
+| name | query | unique name of your pokemon | No | string |
+| total | query |  | No | string |
+| defense | query |  | No | string |
+| attack | query |  | No | string |
+| hp | query |  | No | string |
+| sp_attack | query |  | No | string |
+| sp_defense | query |  | No | string |
+| speed | query |  | No | string |
+| type | query | The type need to exist in database | No | string |
+| type_bis | query | The type need to exist in database | No | string |
+
+**Responses**
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get modifi pokemon | [Pokemon](#pokemon) |
+| 400 | Error | [Error](#error) |
+
+### /create
+---
+##### ***POST***
+**Parameters**
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| id | query | unique id of your pokemon in database | Yes | string |
+| pokemon_id | query | id of your pokemon | Yes | string |
+| name | query | unique name of your pokemon | No | string |
+| total | query |  | No | string |
+| defense | query |  | No | string |
+| attack | query |  | No | string |
+| hp | query |  | No | string |
+| sp_attack | query |  | No | string |
+| sp_defense | query |  | No | string |
+| speed | query |  | No | string |
+| type | query | The type need to exist in database | No | string |
+| type_bis | query | The type need to exist in database | No | string |
+
+**Responses**
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get your created pokemon | [Pokemon](#pokemon) |
+| 400 | Error | [Error](#error) |
+
+### /delete
+---
+##### ***DELETE***
+**Parameters**
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| id | query | unique id of your pokemon in database | Yes | string |
+
+**Responses**
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Pokemon will be delete |  |
+| 400 | Error | [Error](#error) |
+
+### /search
+---
+##### ***GET***
+**Parameters**
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| type | query |  | No | string |
+| pokemon_id | query |  | No | string |
+| name | query |  | No | string |
+
+**Responses**
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get all your pokemon | [Pokemon](#pokemon) |
+| 400 | Error | [Error](#error) |
+
+### Models
+---
+
+### Error  
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| Error | string |  | 
+
+### Pokemon  
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| id | integer |  | 
+| pokemon_id | integer |  | 
+| name | string |  | 
+| Type | [ string, string ] |  | 
+| Total | integer |  | 
+| HP | integer |  | 
+| Attack | integer |  | 
+| Defense | integer |  | 
+| Sp_attack | integer |  | 
+| Sp_defense | integer |  | 
+| speed | integer |  | 
+
+
+##bonus
+
+* Get with params : name | pokemon_id | type | name + pokemon_id
+* Swagger en yaml et en markdown
+* 
