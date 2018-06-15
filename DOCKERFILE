@@ -15,6 +15,7 @@ RUN pip install beautifulsoup4
 COPY .  /usr/src/pk_api
 
 EXPOSE 8000
+CMD ["python", "init.py"]
 CMD ["hug", "-f api.py"]
 
 
