@@ -1,0 +1,22 @@
+# Use an official Python runtime as a parent image
+FROM python3.6.5
+MAINTAINER Pierre Grassin
+LABEL Description="Pokemon API with hug"
+
+# Create app directory
+RUN mkdir -p /usr/src/pk_api
+WORKDIR /usr/src/pk_api
+
+# Install app dependencies
+RUN pip install hug -U
+RUN pip install beautifulsoup4
+
+# Bundle app source
+COPY .  /usr/src/pk_api
+
+EXPOSE 8000
+CMD ["hug", "-f api.py"]
+
+
+
+
