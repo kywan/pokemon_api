@@ -1,0 +1,259 @@
+swagger: '2.0'
+info:
+  description: defaultDescription
+  version: "0.5"
+  title: pokemon_api
+paths:
+  /change:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: string
+          description: unique id of your pokemon in database
+          x-exemple: '1'
+        - name: pokemon_id
+          in: query
+          required: true
+          type: string
+          description: id of your pokemon
+          x-exemple: '1'
+        - name: name
+          in: query
+          required: false
+          type: string
+          description: unique name of your pokemon
+          x-example: test
+        - name: total
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: defense
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: attack
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: hp
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: sp_attack
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: sp_defense
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: speed
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: type
+          in: query
+          required: false
+          type: string
+          description: The type need to exist in database
+          x-example: grass
+        - name: type_bis
+          in: query
+          required: false
+          type: string
+          description: The type need to exist in database
+          x-example: grass
+      responses:
+        '200':
+          description: Get modifi pokemon
+          schema:
+            $ref: '#/definitions/Pokemon'
+        '400':
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+  /create:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: string
+          description: unique id of your pokemon in database
+          x-exemple: '1'
+        - name: pokemon_id
+          in: query
+          required: true
+          type: string
+          description: id of your pokemon
+          x-exemple: '1'
+        - name: name
+          in: query
+          required: false
+          type: string
+          description: unique name of your pokemon
+          x-example: test
+        - name: total
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: defense
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: attack
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: hp
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: sp_attack
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: sp_defense
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: speed
+          in: query
+          required: false
+          type: string
+          x-example: '0'
+        - name: type
+          in: query
+          required: false
+          type: string
+          description: The type need to exist in database
+          x-example: grass
+        - name: type_bis
+          in: query
+          required: false
+          type: string
+          description: The type need to exist in database
+          x-example: grass
+      responses:
+        '200':
+          description: Get your created pokemon
+          schema:
+            $ref: '#/definitions/Pokemon'
+        '400':
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+  /delete:
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: unique id of your pokemon in database
+          type: string
+          x-example: a
+      responses:
+        '200':
+          description: Pokemon will be delete
+        '400':
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+  /search:
+    get:
+      consumes:
+        - text/plain
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          in: query
+          required: false
+          type: string
+          x-example: Bug
+        - name: pokemon_id
+          in: query
+          required: false
+          type: string
+          x-example: a
+        - name: name
+          in: query
+          required: false
+          type: string
+          x-example: b
+      responses:
+        '200':
+          description: Get all your pokemon
+          schema:
+            $ref: '#/definitions/Pokemon'
+        '400':
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      Error:
+        type: string
+  Pokemon:
+    properties:
+      id:
+        type: integer
+        format: int32
+      pokemon_id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      Type:
+        type: array
+        items:
+          type: string
+      Total:
+        type: integer
+        format: int32
+      HP:
+        type: integer
+        format: int32
+      Attack:
+        type: integer
+        format: int32
+      Defense:
+        type: integer
+        format: int32
+      Sp_attack:
+        type: integer
+        format: int32
+      Sp_defense:
+        type: integer
+        format: int32
+      speed:
+        type: integer
+        format: int32
