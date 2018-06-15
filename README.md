@@ -27,8 +27,9 @@ For exemple this:
 ````http://localhost:8000/search````
 
 return to you :
-````[
-    {
+````
+[
+        {
         "id": 3,
         "pokemon_id": 3,
         "name": "Venusaur",
@@ -45,7 +46,7 @@ return to you :
         "speed": 80
     },
     ...
-    ]
+]
 `````
 
 
