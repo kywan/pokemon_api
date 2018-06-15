@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import hug
-# import mysql.connector.errors
 
 from init import connect_db, insert_data  # change pour une lib perso
-import json
 import collections
 
 

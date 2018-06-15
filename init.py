@@ -13,9 +13,8 @@ import re
 #
 #
 def get_html_table():
-    # req = Request('https://pokemondb.net/pokedex/all', headers={'User-Agent': 'Mozilla/5.0'})
-    # html = urlopen(req).read()
-    html = open('./pokemon.html')
+    req = Request('https://pokemondb.net/pokedex/all', headers={'User-Agent': 'Mozilla/5.0'})
+    html = urlopen(req).read()
     soup = BeautifulSoup(html, "html.parser")
     table = soup.table
     table_rows = table.find_all('tr')
