@@ -9,6 +9,8 @@
 [swagger](#swagger)
 
 [bonus](#bonus)
+
+___
 ### Instalation
 ###### Instalation rapide (docker)
 pas encore disponible
