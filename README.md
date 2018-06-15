@@ -182,8 +182,8 @@ SWAGGER
 | speed | integer |  | 
 
 
-##bonus
+## bonus
 
 * Get with params : name | pokemon_id | type | name + pokemon_id
-* Swagger en yaml et en markdown
+* Swagger en yaml ET en markdown
 * 
