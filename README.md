@@ -13,7 +13,7 @@
 ___
 ### Instalation
 ###### Instalation rapide (docker)
-pas encore disponible
+Disponible mais ne fonctionne pas totalement, il y a un début quoi !
 ###### Pré requis
 [Hug.rest](http://www.hug.rest)
 
@@ -205,3 +205,4 @@ SWAGGER
         * si les valeurs ne sont pas renseigné, remplis avec des 0/None
         * retourne le json du pokemon créé
 * fonction de purge avec /purge
+* début de dockerfile
