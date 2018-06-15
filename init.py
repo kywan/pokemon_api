@@ -75,7 +75,6 @@ def insert_data():
                         print("The " + e.msg.split("'")[3] + " " + e.msg.split("'")[1] + " is already in database")
                     else:
                         print(e)
-                        print(row[i])
                 type_pk.append('none')
             elif len(type_pk) == 2:
                 try:

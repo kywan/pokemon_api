@@ -202,5 +202,6 @@ SWAGGER
         * Gestion du name unique
         * impossible de metre 2 fois le meme type
         * impossible de metre un type n'etant pas deja dans la table
+        * si les valeurs ne sont pas renseigné, remplis avec des 0/None
         * retourne le json du pokemon créé
 * fonction de purge avec /purge

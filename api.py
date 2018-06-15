@@ -188,12 +188,12 @@ def create_pokemon(pokemon_id=None, name=None, total=None, hp=None, attack=None,
         cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type + "'")
         cursor.fetchall()
         if cursor.rowcount is not 1:
-            return {"Error": "The type " + type + " don't exist"}
+            cursor.execute("INSERT INTO `PK_Type` (`type`) VALUES ('" + type + "')")
     if type_bis is not None:
         cursor.execute("SELECT `id` FROM `pk_type` WHERE `type` = '" + type_bis + "'")
         cursor.fetchall()
         if cursor.rowcount is not 1:
-            return {"Error": "The type" + type_bis + " don't exist"}
+            cursor.execute("INSERT INTO `PK_Type` (`type`) VALUES ('" + type_bis + "')")
     if type == type_bis and type is not None:
         return {"Error": "The types can't be the same"}
 
